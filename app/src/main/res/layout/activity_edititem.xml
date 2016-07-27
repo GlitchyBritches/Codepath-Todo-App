@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btnSaveEdit"
         android:id="@+id/btnSaveEdit"
-        android:onClick="onSave"
+        android:onClick="onSaveEdit"
         android:layout_below="@+id/etEditItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

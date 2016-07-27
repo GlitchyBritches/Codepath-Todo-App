@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Todo_app</string>
+    <string name="app_name">Simple Todo App</string>
     <string name="btnSaveEdit">Save</string>
     <string name="editItemTitle">Edit Item Below:</string>
     <string name="addItemSuggestion">Add New Item</string>

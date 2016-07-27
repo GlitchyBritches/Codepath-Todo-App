@@ -30,7 +30,7 @@ public class edititem extends AppCompatActivity {
 
     //When save button is pressed, send modified data back to onActivityResult
     //method in MainActivity
-    protected void onSave(View v) {
+    protected void onSaveEdit(View v) {
         String editedText = etEditItem.getText().toString();
         Intent intent = this.getIntent();
         intent.putExtra("editText", editedText);

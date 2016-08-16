@@ -16,6 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".edititem"></activity>
+        <provider
+            android:authorities="com.charmedmatter.glitchybritches.todo_app.todocontentprovider"
+            android:name=".TodoContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

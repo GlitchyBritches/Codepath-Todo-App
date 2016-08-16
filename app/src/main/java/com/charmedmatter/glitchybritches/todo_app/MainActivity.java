@@ -1,34 +1,33 @@
 package com.charmedmatter.glitchybritches.todo_app;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
+import android.content.CursorLoader;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.app.LoaderManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.util.Log;
 
-
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-//The XML somehow makes the object
-//in the code we find it by the android R object and assign a reference to it via
-//lvItems in code (I think) and that allows us to manipulate it
-
-
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     ListView lvItems;
     ArrayList<String> items;
-    ArrayAdapter<String> itemsAdapter;
+    //ArrayAdapter<String> itemsAdapter;
+    CursorAdapter todoItemsAdapter;
+
+
     static final int EDIT_LIST_ITEM = 7734;
 
+    private static final int LOADER_URI = 0;
 
     //Initialize adapter & event listener
     @Override
@@ -36,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvItems = (ListView) findViewById(R.id.lvItems);
-        //items = new ArrayList<>();
-        readItems();
-        itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-        lvItems.setAdapter(itemsAdapter);
+        todoItemsAdapter = new TodoAdapter(this, null, 0);
+        lvItems.setAdapter(todoItemsAdapter);
         setupListViewListener();
+
+
+        getLoaderManager().initLoader(LOADER_URI, null, this);
+        Log.i("INFO: MainActivity.java","onCreate() Fired");
+
+        ///Code about to be deprecated
+        //readItems();
+        //itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+
 
     }
 
@@ -48,9 +54,20 @@ public class MainActivity extends AppCompatActivity {
     public void onAddItem(View v) {
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
         etNewItem.setText("");
-        writeItems();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelperUtil.KEY_ITEM_NAME, itemText);
+        values.put(DatabaseHelperUtil.KEY_PRIORITY, 1);
+        Uri noteUri = getContentResolver().insert(TodoContentProvider.TABLE_URI,
+                values);
+        //todoItemsAdapter.notifyDataSetChanged();
+        restartLoader();
+    }
+
+    //Restarts loader when database is updated
+    private void restartLoader() {
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     //Launch edit activity via an intent (with result when item is clicked (via anonymous
@@ -65,19 +82,20 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(q, EDIT_LIST_ITEM);
     }
 
+    //TODO: Add in support for editing via an activity or fragment
     //Receive edited text from edit activity when it terminates. Modify list item
     //with changes user made in edit activity.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EDIT_LIST_ITEM) {
-            int pos = data.getExtras().getInt("pos");
-            String newText = data.getExtras().getString("editText");
-            items.set(pos, newText);
-            itemsAdapter.notifyDataSetChanged();
-            writeItems();
+            //int pos = data.getExtras().getInt("pos");
+            //String newText = data.getExtras().getString("editText");
+            //items.set(pos, newText);
+            //itemsAdapter.notifyDataSetChanged();
+            //writeItems();
         } else {
-            Log.d("WARN","onActivityResult from edititem activity failed");
+            Log.w("WARN","onActivityResult from edititem activity failed");
         }
     }
 
@@ -89,9 +107,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter,
                                            View item, int pos, long id) {
-                items.remove(pos);
-                itemsAdapter.notifyDataSetChanged();
-                writeItems();
+                //items.remove(pos);
+                //itemsAdapter.notifyDataSetChanged();
+                //writeItems();
+                Log.i("INFO: MainActivity.java","onItemLongClickLister() Fired");
                 return true;
             }
         });
@@ -102,35 +121,38 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapter,
                                             View item, int pos, long id) {
-                        launchActivity(pos);
+                        //launchActivity(pos);
+                        Log.i("INFO: MainActivity.java","onItemClickLister() Fired");
                     }
                 });
 
     }
 
-    //Read items into memory from file on device
-    private void readItems() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            items = new ArrayList<String>(FileUtils.readLines(todoFile));
-        } catch (IOException e) {
-            items = new ArrayList<String>();
-        }
+    @Override
+    public Loader<Cursor> onCreateLoader(int loader_id, Bundle bundle) {
+                return new CursorLoader(
+                        this,   // Parent activity context
+                        TodoContentProvider.TABLE_URI,        // Table to query
+                        null,     // Projection to return
+                        null,            // No selection clause
+                        null,            // No selection arguments
+                        null             // Default sort order
+                );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        todoItemsAdapter.swapCursor(data);
 
     }
 
-    //Write items to file on device
-    private void writeItems() {
-        File filesDir = getFilesDir();
-        File todoFile = new File(filesDir, "todo.txt");
-        try {
-            FileUtils.writeLines(todoFile, items);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        todoItemsAdapter.swapCursor(null);
 
     }
+
 
 }
 

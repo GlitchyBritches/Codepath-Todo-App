@@ -22,4 +22,5 @@
         android:singleLine="true"
         android:src="@drawable/ic_record_w"
         android:id="@+id/imgPriority" />
+
 </RelativeLayout>

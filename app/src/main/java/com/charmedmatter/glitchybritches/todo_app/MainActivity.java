@@ -1,11 +1,14 @@
 package com.charmedmatter.glitchybritches.todo_app;
 
+import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.content.CursorLoader;
 import android.net.Uri;
+import android.app.FragmentManager;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,16 +19,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.util.Log;
 
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>, FragmentCommunicator<Object>{
     ListView lvItems;
-    ArrayList<String> items;
-    //ArrayAdapter<String> itemsAdapter;
     CursorAdapter todoItemsAdapter;
-
-
-    static final int EDIT_LIST_ITEM = 7734;
+    FragmentManager fragmentManager;
 
     private static final int LOADER_URI = 0;
 
@@ -39,78 +41,60 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         lvItems.setAdapter(todoItemsAdapter);
         setupListViewListener();
 
-
         getLoaderManager().initLoader(LOADER_URI, null, this);
         Log.i("INFO: MainActivity.java","onCreate() Fired");
-
-        ///Code about to be deprecated
-        //readItems();
-        //itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-
 
     }
 
     //Add new item via adapter and then write to file
     public void onAddItem(View v) {
-        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
-        String itemText = etNewItem.getText().toString();
-        etNewItem.setText("");
-
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelperUtil.KEY_ITEM_NAME, itemText);
-        values.put(DatabaseHelperUtil.KEY_PRIORITY, 1);
-        Uri noteUri = getContentResolver().insert(TodoContentProvider.TABLE_URI,
-                values);
-        //todoItemsAdapter.notifyDataSetChanged();
-        restartLoader();
+        showDialog("new_item");
     }
 
-    //Restarts loader when database is updated
-    private void restartLoader() {
-        getLoaderManager().restartLoader(0, null, this);
+    private void showDialog(String purpose) {
+        if (purpose == "new_item") {
+            fragmentManager = getFragmentManager();
+            EditTodoFragment newItemDialog = new EditTodoFragment();
+            newItemDialog.show(fragmentManager, "TodoDialog");
+        }
+
     }
+    private void showDialog(String purpose, long id){
+        if (purpose == "edit_item") {
+            fragmentManager = getFragmentManager();
 
-    //Launch edit activity via an intent (with result when item is clicked (via anonymous
-    //event listener) pass the text & list position of the item via the intent.
-    private void launchActivity(int pos) {
-        Intent q = new Intent(this, edititem.class);
-        String text = items.get(pos).toString();
-        Log.d("INFO",text);
+            Uri uri = Uri.parse(TodoContentProvider.TABLE_URI + "/" + id);
+            Cursor cursor = getContentResolver().query(uri,DatabaseHelperUtil.TODO_ITEMS_COLUMNS, null, null,null);
+            cursor.moveToFirst();
+            String itemName = cursor.getString(cursor.getColumnIndex(DatabaseHelperUtil.KEY_ITEM_NAME));
+            int priority = cursor.getInt(cursor.getColumnIndex(DatabaseHelperUtil.KEY_PRIORITY));
+            String dueDate = cursor.getString(cursor.getColumnIndex(DatabaseHelperUtil.KEY_DUE_DATE));
+            String note = cursor.getString(cursor.getColumnIndex(DatabaseHelperUtil.KEY_NOTE));
+            int complete = cursor.getInt(cursor.getColumnIndex(DatabaseHelperUtil.KEY_COMPLETE));
+            cursor.close();
 
-        q.putExtra("editTextString", text);
-        q.putExtra("pos", pos);
-        startActivityForResult(q, EDIT_LIST_ITEM);
-    }
+            EditTodoFragment editDialog = EditTodoFragment.newInstance(id, itemName, priority, dueDate, note, complete);
+            editDialog.show(fragmentManager, "TodoDialog");
 
-    //TODO: Add in support for editing via an activity or fragment
-    //Receive edited text from edit activity when it terminates. Modify list item
-    //with changes user made in edit activity.
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EDIT_LIST_ITEM) {
-            //int pos = data.getExtras().getInt("pos");
-            //String newText = data.getExtras().getString("editText");
-            //items.set(pos, newText);
-            //itemsAdapter.notifyDataSetChanged();
-            //writeItems();
-        } else {
-            Log.w("WARN","onActivityResult from edititem activity failed");
         }
     }
 
-    // Setup two anonymous click listeners for long click (for deletions)
-    // and short clicks (for item edits)
+
+
+
+    // Click listeners (for long click (for deletions) and short clicks (for item edits))
     private void setupListViewListener() {
         lvItems.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter,
                                            View item, int pos, long id) {
-                //items.remove(pos);
-                //itemsAdapter.notifyDataSetChanged();
-                //writeItems();
+
                 Log.i("INFO: MainActivity.java","onItemLongClickLister() Fired");
+
+
+
+
                 return true;
             }
         });
@@ -121,11 +105,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     @Override
                     public void onItemClick(AdapterView<?> adapter,
                                             View item, int pos, long id) {
-                        //launchActivity(pos);
                         Log.i("INFO: MainActivity.java","onItemClickLister() Fired");
+                        showDialog("edit_item", id);
+
                     }
                 });
 
+    }
+
+    //Loader methods
+
+    //Restarts loader when database is updated
+    private void restartLoader() {
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     @Override
@@ -153,6 +145,53 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    //Interfaces for fragment communication
+    /**
+     * Sends data between Fragments
+     * @param operation operation to be performed
+     * @param data data to pass
+    */
+    public void sendData(String operation, Object data) {
+        //Set date
+        if (operation == "setTodoFragmentDate" && data instanceof String){
+            EditTodoFragment editTodoFragment = (EditTodoFragment)fragmentManager.findFragmentByTag("TodoDialog");
+            String date = (String)data;
+            editTodoFragment.setDate(date);
+        }
 
+        //Store todoitem edit
+        if (operation == "editTodoItem" && data instanceof ContentValues){
+            ContentValues values = (ContentValues)data;
+            long _id_current;
+            _id_current = values.getAsLong("_id");
+            values.remove("_id");
+            Uri uri = Uri.parse(TodoContentProvider.TABLE_URI + "/" + _id_current);
+            getContentResolver().update(uri,values,null,null);
+            todoItemsAdapter.notifyDataSetChanged();
+            restartLoader();
+        }
+
+        //Add new todoitem
+        if (operation == "addNewTodoItem" && data instanceof ContentValues){
+            ContentValues values = (ContentValues)data;
+            Uri todoUri = getContentResolver().insert(TodoContentProvider.TABLE_URI,
+                    values);
+            todoItemsAdapter.notifyDataSetChanged();
+            restartLoader();
+        }
+
+    }
+
+    /**
+     * Launch new fragment from existing fragment
+     * @param fragmentClassName name of fragment class to launch
+     */
+    public void launchFragment(String fragmentClassName){
+        if (fragmentClassName == "EditDateFragment"){
+            EditDateFragment dateDialog = new EditDateFragment();
+            Log.d("MainActivity.java",String.valueOf(dateDialog));
+            dateDialog.show(fragmentManager, "editDateDialog");
+        }
+    }
 }
 

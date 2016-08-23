@@ -25,10 +25,11 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
     protected static final String KEY_PRIORITY = "priority";
     protected static final String KEY_DUE_DATE = "due_date";
     protected static final String KEY_NOTE = "note";
+    protected static final String KEY_COMPLETE = "complete";
     protected static final String KEY_CREATED_AT = "created_at";
     public static final String[] TODO_ITEMS_COLUMNS =
             {KEY_ID, KEY_ITEM_NAME, KEY_PRIORITY, KEY_DUE_DATE,
-            KEY_NOTE, KEY_CREATED_AT};
+            KEY_NOTE, KEY_COMPLETE, KEY_CREATED_AT};
 
 
 
@@ -38,6 +39,7 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
             + TABLE_TODO + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_ITEM_NAME + " TEXT NOT NULL DEFAULT ''," + KEY_PRIORITY
             + " INT NOT NULL DEFAULT 0," + KEY_DUE_DATE + " DATE," + KEY_NOTE + " TEXT NOT NULL DEFAULT '',"
+            + KEY_COMPLETE + " BOOLEAN NOT NULL DEFAULT 0,"
             + KEY_CREATED_AT + " DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" + ");";
 
     public DatabaseHelperUtil(Context context) {
@@ -60,7 +62,7 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    protected long addRowDirectly(String todo_item, int priority, String due_date, String notes) {
+    protected long addRowDirectly(String todo_item, int priority, String due_date, String notes, int complete) {
         //get timestamp
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -70,7 +72,10 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
         values.put(KEY_PRIORITY, priority);
         values.put(KEY_DUE_DATE, due_date);
         values.put(KEY_NOTE, notes);
-
+        if (complete > 1 | complete < 0) {
+            complete = 0;
+        }
+        values.put(KEY_COMPLETE, complete);
         long result =  db.insert(TABLE_TODO, null, values);
         db.close();
         return result;
@@ -90,25 +95,14 @@ public class DatabaseHelperUtil extends SQLiteOpenHelper {
         return result;
 
     }
-    
 
-    protected Cursor getAllRows(){
+    protected Cursor getAllRowsDirectly(){
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT  * FROM " + TABLE_TODO + ");";
-
         Log.d(LOG, selectQuery);
-
         Cursor c = db.rawQuery(selectQuery, null);
-
-        if (c.moveToFirst()) {
-            do {
-
-
-            } while (c.moveToNext());
-        }
-
+        db.close();
         return c;
-
     }
 
     //delete entry

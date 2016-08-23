@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 
 public class TodoContentProvider extends ContentProvider {
@@ -32,7 +33,6 @@ public class TodoContentProvider extends ContentProvider {
     static
     {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, TODOITEMSTABLE);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/*", TODOITEMSTABLE_ROW);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", TODOITEMSTABLE_ROWWITHKEY);
     }
 
@@ -45,14 +45,22 @@ public class TodoContentProvider extends ContentProvider {
         return false;
     }
 
+
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] columns, String selection, String[] selectionArgs, String sortOrder) {
-        return db.query(DatabaseHelperUtil.TABLE_TODO, DatabaseHelperUtil.TODO_ITEMS_COLUMNS,
+        Log.i("TodoContentProvider", uri.toString());
+        Log.i("TodoContentProvider", String.valueOf(uriMatcher.match(uri)));
+
+        if (uriMatcher.match(uri) == TODOITEMSTABLE_ROWWITHKEY){
+            selection = DatabaseHelperUtil.KEY_ID + "=" + uri.getLastPathSegment();
+            selectionArgs = null;
+            Log.i("TodoContentProvider", selection);
+        }
+
+
+        return db.query(DatabaseHelperUtil.TABLE_TODO, columns,
                 selection, selectionArgs,null, null, DatabaseHelperUtil.KEY_CREATED_AT + " DESC");
-
-
-
 
     }
 
@@ -76,6 +84,11 @@ public class TodoContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        if (uriMatcher.match(uri) == TODOITEMSTABLE_ROWWITHKEY){
+            selection = DatabaseHelperUtil.KEY_ID + "=" + uri.getLastPathSegment();
+            selectionArgs = null;
+            Log.i("TodoContentProvider", selection);
+        }
         return db.update(DatabaseHelperUtil.TABLE_TODO,contentValues,selection, selectionArgs);
     }
 }

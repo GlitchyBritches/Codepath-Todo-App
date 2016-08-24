@@ -79,6 +79,10 @@ public class TodoContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
+        if (uriMatcher.match(uri) == TODOITEMSTABLE_ROWWITHKEY){
+            selection = DatabaseHelperUtil.KEY_ID + "=" + uri.getLastPathSegment();
+            selectionArgs = null;
+         }
         return db.delete(DatabaseHelperUtil.TABLE_TODO, selection, selectionArgs);
     }
 

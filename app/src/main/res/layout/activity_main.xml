@@ -19,6 +19,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:divider="@android:color/holo_purple"
+        android:dividerHeight="1px"
         android:headerDividersEnabled="false" />
 
     <ImageButton

@@ -20,7 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:singleLine="true"
-        android:src="@drawable/ic_record_w"
+        android:src="@drawable/listfreak_btn_radio_on_holo_light"
         android:id="@+id/imgPriority" />
 
 </RelativeLayout>

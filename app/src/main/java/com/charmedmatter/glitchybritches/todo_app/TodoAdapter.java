@@ -45,7 +45,8 @@ public class TodoAdapter extends CursorAdapter {
         if (todoCompleteStatus == 0)
         {
             todoItem.setTextColor(Color.BLACK);
-            priorityItem.setImageResource(R.drawable.ic_record_w);
+
+            priorityItem.setImageResource(R.drawable.listfreak_btn_radio_on_holo_light);
             if (todoPriority == 0) {
                 priorityItem.setColorFilter(android.graphics.Color.GREEN);
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="ListFreak" parent="@style/_ListFreak"/>
+
+  <style name="_ListFreak" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextListFreak</item>
+
+    <item name="android:textColorHighlight">#999461ff</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewListFreak</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxListFreak</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonListFreak</item>
+
+    <item name="android:buttonStyle">@style/ButtonListFreak</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonListFreak</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerListFreak</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemListFreak</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarListFreak</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleListFreak</item>
+
+    <item name="android:listViewStyle">@style/ListViewListFreak</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewListFreak.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemListFreak</item>
+
+  </style>
+
+</resources>

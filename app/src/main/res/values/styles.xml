@@ -1,11 +1,101 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="ListFreakStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/listfreak_color</item>
+        <item name="colorPrimaryDark">@color/listfreak_color</item>
+        <item name="colorAccent">@color/listfreak_color</item>
     </style>
+
+  <style name="EditTextListFreak" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/listfreak_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="AutoCompleteTextViewListFreak" parent="android:Widget.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/listfreak_list_selector_holo_light</item>
+	  <item name="android:background">@drawable/listfreak_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="CheckBoxListFreak" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:button">@drawable/listfreak_btn_check_holo_light</item>
+  </style>
+
+  <style name="RadioButtonListFreak" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/listfreak_btn_radio_holo_light</item>
+  </style>
+
+  <style name="ButtonListFreak" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/listfreak_btn_default_holo_light</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ImageButtonListFreak" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/listfreak_btn_default_holo_light</item>
+  </style>
+
+  <style name="SpinnerListFreak" parent="android:Widget.Spinner">
+      <item name="android:background">@drawable/listfreak_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/listfreak_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerDropDownItemListFreak" parent="android:Widget.DropDownItem.Spinner">
+      <item name="android:checkMark">@drawable/listfreak_btn_radio_holo_light</item>
+  </style>
+  <style name="TabListFreak">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/listfreak_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextListFreak">
+	  <item name="android:textColor">#000000</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarListFreak" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/listfreak_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/listfreak_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="ToggleListFreak" parent="android:Widget.Button.Toggle">
+      <item name="android:background">@drawable/listfreak_btn_toggle_holo_light</item>
+      <item name="android:minHeight">48dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ListViewListFreak" parent="android:Widget.ListView">
+      <item name="android:listSelector">@drawable/listfreak_list_selector_holo_light</item>
+  </style>
+
+  <style name="ListViewListFreak.White" parent="android:Widget.ListView.White">
+      <item name="android:listSelector">@drawable/listfreak_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerItemListFreak" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+      <item name="android:textColor">#000000</item>
+  </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/listfreak_splashscreen</item>
+    </style>
+
 
 </resources>

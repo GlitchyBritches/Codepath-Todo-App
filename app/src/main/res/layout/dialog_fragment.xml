@@ -11,12 +11,14 @@
         android:text="@string/txtview_edit_todo_fragment_header"
         android:id="@+id/textView5"
         android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#fafafa"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:background="@android:color/holo_purple"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:background="@color/listfreak_color" />
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -39,7 +41,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingRight="5dp"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@color/listfreak_color"
                 android:text="@string/edittext_enter_todo_item"
                 android:id="@+id/textView"
                />
@@ -48,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editItemName"
                 android:ems="16"
-                android:gravity="start" />
+                android:gravity="start"
+                style="@style/EditTextListFreak" />
 
         </TableRow>
 
@@ -61,7 +64,7 @@
                 android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@android:color/holo_blue_light"/>
+                android:textColor="@color/listfreak_color"/>
 
             <Spinner
                 android:id="@+id/spinner_priority_level"
@@ -72,7 +75,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:entries="@array/priorities"
 
-                />
+                style="@style/SpinnerListFreak" />
         </TableRow>
 
 
@@ -81,7 +84,7 @@
             <TextView
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@color/listfreak_color"
                 android:text="Due Date"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
@@ -93,7 +96,8 @@
                 android:ems="10"
                 android:id="@+id/editDueDate"
                 android:focusable="false"
-                android:layout_column="1" />
+                android:layout_column="1"
+                style="@style/EditTextListFreak" />
 
 
         </TableRow>
@@ -106,14 +110,15 @@
                 android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@android:color/holo_blue_light"/>
+                android:textColor="@color/listfreak_color"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/editNotes"
                 android:ems="16"
-                android:gravity="start" />
+                android:gravity="start"
+                style="@style/EditTextListFreak" />
 
         </TableRow>
 
@@ -127,7 +132,7 @@
                 android:textStyle="bold"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="@android:color/holo_blue_light"
+                android:textColor="@color/listfreak_color"
                 android:text="Complete?"
                 android:id="@+id/complete"
                 />
@@ -137,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/checkComplete"
                 android:layout_column="1"
-                android:checked="false" />
+                android:checked="false"
+                style="@style/CheckBoxListFreak" />
 
 
         </TableRow>
@@ -147,12 +153,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Save"
         android:id="@+id/btnSave"
         android:layout_below="@+id/tablelayout1"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:background="@android:color/holo_purple" />
+        android:textStyle="bold"
+        android:textColor="#fafafa"
+        android:background="@color/listfreak_color" />
 
     <ImageView
         android:layout_width="wrap_content"

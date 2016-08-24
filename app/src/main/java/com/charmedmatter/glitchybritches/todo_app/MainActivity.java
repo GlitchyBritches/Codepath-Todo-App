@@ -91,10 +91,9 @@ public class MainActivity extends AppCompatActivity implements
                                            View item, int pos, long id) {
 
                 Log.i("INFO: MainActivity.java","onItemLongClickLister() Fired");
-
-
-
-
+                Uri uri = Uri.parse(TodoContentProvider.TABLE_URI + "/" + id);
+                getContentResolver().delete(uri, null, null);
+                restartLoader();
                 return true;
             }
         });

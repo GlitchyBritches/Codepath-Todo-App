@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Set Date"
         android:textStyle="bold"
-        android:background="#ff4081"
+        android:background="@color/listfreak_color"
         android:textColor="#fafafa"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/button2"

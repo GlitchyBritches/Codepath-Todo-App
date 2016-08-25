@@ -2,13 +2,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@color/colorPrimaryDark"/>
+        android:drawable="@color/listfreak_color"/>
 
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_launcher"
-            android:tint="#9461ff" />
+            android:src="@drawable/ic_launcher_title"
+             />
     </item>
 
 </layer-list>

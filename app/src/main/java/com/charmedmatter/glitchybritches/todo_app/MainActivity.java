@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(LOADER_URI, null, this);
         Log.i("INFO: MainActivity.java","onCreate() Fired");
 
+
     }
 
     //Add new item via adapter and then write to file

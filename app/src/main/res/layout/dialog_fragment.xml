@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/txtview_edit_todo_fragment_header"
+        android:text="@string/listfreak_txtview_edititem"
         android:id="@+id/textView5"
         android:gravity="center"
         android:textStyle="bold"
@@ -16,8 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+        android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
         android:background="@color/listfreak_color" />
 
     <TableLayout
@@ -38,11 +38,11 @@
                 android:padding="1dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingRight="5dp"
+                android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingRight="@dimen/listfreak_dialog_item_horizontal_left_padding"
                 android:textColor="@color/listfreak_color"
-                android:text="@string/edittext_enter_todo_item"
+                android:text="@string/listfreak_txtview_itemname"
                 android:id="@+id/textView"
                />
             <EditText
@@ -59,19 +59,18 @@
 
             <TextView
                 android:padding="1dip"
-                android:text="Priority"
+                android:text="@string/listfreak_txtview_priority"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingRight="@dimen/listfreak_dialog_item_horizontal_left_padding"
                 android:textColor="@color/listfreak_color"/>
 
             <Spinner
                 android:id="@+id/spinner_priority_level"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:entries="@array/priorities"
 
@@ -82,10 +81,11 @@
         <TableRow>
 
             <TextView
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingRight="@dimen/listfreak_dialog_item_horizontal_left_padding"
                 android:textColor="@color/listfreak_color"
-                android:text="Due Date"
+                android:text="@string/listfreak_txtview_duedate"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
@@ -105,11 +105,12 @@
         <TableRow>
 
             <TextView
-                android:text="Notes"
+                android:text="@string/listview_txtview_notes"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingRight="@dimen/listfreak_dialog_item_horizontal_left_padding"
                 android:textColor="@color/listfreak_color"/>
 
             <EditText
@@ -130,10 +131,11 @@
                 android:padding="1dip"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingBottom="@dimen/listfreak_dialog_item_vertical_padding"
+                android:paddingRight="@dimen/listfreak_dialog_item_horizontal_left_padding"
                 android:textColor="@color/listfreak_color"
-                android:text="Complete?"
+                android:text="@string/listfreak_txtview_complete"
                 android:id="@+id/complete"
                 />
 
@@ -154,7 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Save"
+        android:text="@string/listfreak_btn_save"
         android:id="@+id/btnSave"
         android:layout_below="@+id/tablelayout1"
         android:layout_alignParentStart="true"
@@ -167,7 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/closeTodoDialog"
-        android:paddingRight="10dp"
+        android:paddingRight="@dimen/listfreak_exit_padding"
         android:src="@drawable/abc_ic_clear_material"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/tablelayout1"

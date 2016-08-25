@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#ff4081</color>
     <color name="listfreak_color">#9461ff</color>
+    <color name="listfreak_high_priority">#f10b40</color>
+    <color name="listfreak_medium_priority">#e0e00b</color>
+    <color name="listfreak_low_priority">#04df67</color>
 </resources>

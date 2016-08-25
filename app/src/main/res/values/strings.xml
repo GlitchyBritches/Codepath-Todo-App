@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">List Freak</string>
-    <string name="btnSaveEdit">Save</string>
-    <string name="editItemTitle">Edit Item Below:</string>
-    <string name="addItemSuggestion">Add New Item</string>
-    <string name="addItemHint">Item Name</string>
-    <string name="btnAddItem">Add Todo Item</string>
-    <string name="txtEditTodoFragmentHeader" />
-    <string name="txtview_edit_todo_fragment_header">Edit Item</string>
-    <string name="edittext_enter_todo_item">Item Name</string>
+    <string name="listfreak_btn_save">Save</string>
+    <string name="listfreak_txtview_complete">Complete?</string>
+    <string name="listview_txtview_notes">Notes</string>
+    <string name="listfreak_txtview_duedate">Due Date</string>
+    <string name="listfreak_txtview_priority">Priority</string>
+    <string name="listfreak_txtview_itemname">Item Name</string>
+    <string name="listfreak_btn_setdate">Set Date</string>
+    <string name="listfreak_txtview_edititem">Edit Item</string>
     <string-array name="priorities">
         <item name="low">Low</item>
         <item name="medium">Medium</item>

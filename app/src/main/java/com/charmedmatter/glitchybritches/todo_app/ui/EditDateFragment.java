@@ -1,12 +1,9 @@
-package com.charmedmatter.glitchybritches.todo_app;
+package com.charmedmatter.glitchybritches.todo_app.ui;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +11,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
+
+import com.charmedmatter.glitchybritches.todo_app.R;
+import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
 
 public class EditDateFragment extends DialogFragment implements View.OnClickListener {
 
@@ -26,6 +26,7 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
 
     }
 
+    //Static constructor method for detecting existing date
     public static EditDateFragment newInstance(String date) {
         EditDateFragment frag = new EditDateFragment();
         Bundle args = new Bundle();
@@ -51,6 +52,7 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
         fragmentCommunicator=(FragmentCommunicator)context;
 
     }
+
 
 
     @Override
@@ -86,6 +88,7 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
         return date;
     }
 
+    //Send date data via interface to edittodofragment
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button2) {
@@ -94,8 +97,6 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
             int month = datePicker.getMonth() + 1;
             int year = datePicker.getYear();
             String dateString = processDateString(day, month, year);
-
-            Log.i("EditDateFragment.java",dateString);
 
             dismiss();
 

@@ -12,7 +12,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Date"
+        android:text="@string/listfreak_btn_setdate"
         android:textStyle="bold"
         android:background="@color/listfreak_color"
         android:textColor="#fafafa"

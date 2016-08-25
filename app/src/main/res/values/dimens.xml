@@ -3,4 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="tab_host_default_height">48dp</dimen>
+    <dimen name="listfreak_exit_padding">10dp</dimen>
+    <dimen name="listfreak_dialog_item_vertical_padding">10dp</dimen>
+    <dimen name="listfreak_dialog_item_horizontal_left_padding">5dp</dimen>
+
 </resources>

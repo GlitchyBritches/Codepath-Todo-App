@@ -1,11 +1,14 @@
-package com.charmedmatter.glitchybritches.todo_app;
+package com.charmedmatter.glitchybritches.todo_app.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Splashscreen extends AppCompatActivity {
+import com.charmedmatter.glitchybritches.todo_app.ui.MainActivity;
 
+public class SplashscreenActivity extends AppCompatActivity {
+
+    //Immediately start MainActivity when application resources load
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,7 +1,6 @@
 package com.charmedmatter.glitchybritches.todo_app.ui;
 
 import android.support.v7.app.AppCompatDialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Gravity;

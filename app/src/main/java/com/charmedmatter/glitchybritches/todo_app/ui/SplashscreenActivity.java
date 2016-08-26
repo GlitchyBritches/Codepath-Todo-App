@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.charmedmatter.glitchybritches.todo_app.ui.MainActivity;
-
 public class SplashscreenActivity extends AppCompatActivity {
 
     //Immediately start MainActivity when application resources load

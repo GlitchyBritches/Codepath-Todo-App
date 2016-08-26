@@ -1,6 +1,5 @@
 package com.charmedmatter.glitchybritches.todo_app.ui;
 
-//import android.app.DialogFragment;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.charmedmatter.glitchybritches.todo_app.*;
+import com.charmedmatter.glitchybritches.todo_app.R;
 import com.charmedmatter.glitchybritches.todo_app.data.TodoItemsDbHelper;
 import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
 
@@ -91,8 +90,6 @@ public class EditTodoFragment extends AppCompatDialogFragment implements View.On
     public void onResume() {
         super.onResume();
         fragmentCommunicator=(FragmentCommunicator)getActivity();
-        Log.i("EditTodoFragment", "onAttachCalled");
-        Log.i("EditTodoFragment", String.valueOf(fragmentCommunicator));
 
         Window window = getDialog().getWindow();
         window.setGravity(Gravity.CENTER);

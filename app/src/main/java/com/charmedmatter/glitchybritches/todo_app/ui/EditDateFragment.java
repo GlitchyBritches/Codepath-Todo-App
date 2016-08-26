@@ -47,21 +47,12 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        fragmentCommunicator=(FragmentCommunicator)context;
-
-    }
-
-
-
-    @Override
     public void onResume() {
         super.onResume();
         Window window = getDialog().getWindow();
-        //window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, 220);
         window.setGravity(Gravity.CENTER);
-        //TODO: Set methods for restoring state in case of app interruption or screen rotation
+        fragmentCommunicator=(FragmentCommunicator)getActivity();
+
     }
 
     //Process date integers from DatePicker and transform them into sqlite3 ready string

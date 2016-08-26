@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,15 +81,12 @@ public class EditTodoFragment extends DialogFragment implements View.OnClickList
         return v;
     }
 
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        fragmentCommunicator=(FragmentCommunicator)context;
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
+        fragmentCommunicator=(FragmentCommunicator)getActivity();
+        Log.i("EditTodoFragment", "onAttachCalled");
+        Log.i("EditTodoFragment", String.valueOf(fragmentCommunicator));
 
         Window window = getDialog().getWindow();
         window.setGravity(Gravity.CENTER);

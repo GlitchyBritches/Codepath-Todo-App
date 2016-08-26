@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements
         setupListViewListener();
         getLoaderManager().initLoader(LOADER_URI, null, this);
         fragmentManager = getFragmentManager();
-
-
+        
     }
+
 
     //Add new item via adapter and then write to file
     protected void onAddItem(View v) {

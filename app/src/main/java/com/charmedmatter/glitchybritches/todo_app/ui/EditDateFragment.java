@@ -1,6 +1,6 @@
 package com.charmedmatter.glitchybritches.todo_app.ui;
 
-import android.app.DialogFragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +15,9 @@ import android.widget.DatePicker;
 import com.charmedmatter.glitchybritches.todo_app.R;
 import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
 
-public class EditDateFragment extends DialogFragment implements View.OnClickListener {
+import java.lang.reflect.Method;
+
+public class EditDateFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
 
     Button setDate;
@@ -34,12 +36,18 @@ public class EditDateFragment extends DialogFragment implements View.OnClickList
         return frag;
     }
 
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(this.STYLE_NO_TITLE, 0);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+
         View v = inflater.inflate(R.layout.dialog_fragment_date_picker,null);
         setDate = (Button)v.findViewById(R.id.button2);
         setDate.setOnClickListener(this);

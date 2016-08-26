@@ -5,7 +5,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.content.CursorLoader;
 import android.net.Uri;
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements
         lvItems.setAdapter(todoItemsAdapter);
         setupListViewListener();
         getLoaderManager().initLoader(LOADER_URI, null, this);
-        fragmentManager = getFragmentManager();
-        
+        fragmentManager = getSupportFragmentManager();
+
     }
 
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void showDialog(String purpose) {
         if (purpose == "newItem") {
-            fragmentManager = getFragmentManager();
+            fragmentManager = getSupportFragmentManager();
             EditTodoFragment newItemDialog = new EditTodoFragment();
             newItemDialog.show(fragmentManager, "TodoDialog");
         }

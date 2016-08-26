@@ -1,8 +1,8 @@
 package com.charmedmatter.glitchybritches.todo_app.ui;
 
-import android.app.DialogFragment;
+//import android.app.DialogFragment;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.content.ContentValues;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -17,12 +17,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.charmedmatter.glitchybritches.todo_app.R;
+import com.charmedmatter.glitchybritches.todo_app.*;
 import com.charmedmatter.glitchybritches.todo_app.data.TodoItemsDbHelper;
 import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
 
 
-public class EditTodoFragment extends DialogFragment implements View.OnClickListener {
+public class EditTodoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     //Fragment communicator instance + other view items that need to be populated
     FragmentCommunicator fragmentCommunicator;
@@ -53,11 +53,17 @@ public class EditTodoFragment extends DialogFragment implements View.OnClickList
         return frag;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(this.STYLE_NO_TITLE, 0);
+    }
+
     //Overriden methods
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
         View v = inflater.inflate(R.layout.dialog_fragment, null);
         dateField = (EditText)v.findViewById(R.id.editDueDate);
         closeDialog = (ImageView)v.findViewById(R.id.closeTodoDialog);

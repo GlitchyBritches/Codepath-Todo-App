@@ -32,6 +32,6 @@
         android:layout_alignParentEnd="true"
         android:background="#0000"
         android:onClick="onAddItem"
-        android:tint="@color/abc_btn_colored_borderless_text_material" />
+        android:tint="@color/listfreak_color" />
 
 </RelativeLayout>

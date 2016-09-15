@@ -33,5 +33,5 @@ Video walkthrough of implemented user stories:
 <img src='https://thumbs.gfycat.com/GenerousKnobbyCuckoo-size_restricted.gif' title='Video Walkthrough' alt='Video Walkthrough' />
 
 ## 3rd party library credits
-* SectionCursorAdapter: The list adapter in this app which makes headers possible was created by extending SectionCursorAdapter ([github.com/twotoasters/SectionCursorAdapter](https://github.com/twotoasters/SectionCursorAdapter) by twotoasters ([twotoasters.com](http://twotoasters.com))
+* SectionCursorAdapter: The list adapter in this app which makes headers possible was created by extending SectionCursorAdapter ([github.com/twotoasters/SectionCursorAdapter](https://github.com/twotoasters/SectionCursorAdapter)) by twotoasters ([twotoasters.com](http://twotoasters.com))
 * ffmpeg: sample gif created using ffmpeg command line tool: [ffmpeg.org](https://ffmpeg.org/)

@@ -8,10 +8,29 @@
     <string name="listfreak_txtview_itemname">Item Name</string>
     <string name="listfreak_btn_setdate">Set Date</string>
     <string name="listfreak_txtview_edititem">Edit Item</string>
+    <string name="listfreak_spinner_organize_by">Organize Items By:</string>
+    <string name="reorder">reorder</string>
     <string-array name="priorities">
         <item name="low">Low</item>
         <item name="medium">Medium</item>
         <item name="high">High</item>
         <item name="urgent">Urgent</item>
     </string-array>
+    <string-array name="date_categories">
+        <item name="past_due">Past Due</item>
+        <item name="today">Today</item>
+        <item name="tomorrow">Tomorrow</item>
+        <item name="this_week">This Week</item>
+        <item name="future">In The Future</item>
+    </string-array>
+    <string-array name="order">
+        <item name="sort_by_priority">Priority</item>
+        <item name="sort_by_due_date">Due Date</item>
+        <item name="sort_by_date_created">Date Created</item>
+    </string-array>
+    <string name="overdue">Overdue</string>
+    <string name="due_today">Due Today</string>
+    <string name="due_tommorrow">Due Tomorrow</string>
+    <string name="due_this_week">Due This Week</string>
+    <string name="due_after_this_week">Due After This Week</string>
 </resources>

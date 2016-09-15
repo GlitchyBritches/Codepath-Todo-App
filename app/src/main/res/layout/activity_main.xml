@@ -4,24 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.MainActivity"
-    android:id="@+id/itemContainer">
+    android:id="@+id/itemContainer"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/list_freak_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <Spinner
+            android:id="@+id/spinner_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:prompt="@string/listfreak_spinner_organize_by"
+            android:entries="@array/order"
+            style="@style/SpinnerItemListFreak" />
 
+    </android.support.v7.widget.Toolbar>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvItems"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:divider="@android:color/holo_purple"
         android:dividerHeight="1px"
-        android:headerDividersEnabled="false" />
+        android:headerDividersEnabled="false"
+        android:layout_below="@+id/list_freak_toolbar" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -29,7 +48,7 @@
         android:id="@+id/imageButton"
         android:src="@drawable/ic_add_circle_black_48dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="#0000"
         android:onClick="onAddItem"
         android:tint="@color/listfreak_color" />

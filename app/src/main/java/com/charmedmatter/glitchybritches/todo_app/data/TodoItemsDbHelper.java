@@ -28,6 +28,14 @@ public class TodoItemsDbHelper extends SQLiteOpenHelper {
             {KEY_ID, KEY_ITEM_NAME, KEY_PRIORITY, KEY_DUE_DATE,
             KEY_NOTE, KEY_COMPLETE, KEY_CREATED_AT};
 
+    //Order By Statements
+    public static final String SORT_BY_DATE = TodoItemsDbHelper.KEY_DUE_DATE + " IS NULL OR " +
+    TodoItemsDbHelper.KEY_DUE_DATE + "='' , " +
+    TodoItemsDbHelper.KEY_DUE_DATE + " ASC , " +
+    TodoItemsDbHelper.KEY_PRIORITY + " DESC";
+    public static final String SORT_BY_PRIORITY = TodoItemsDbHelper.KEY_PRIORITY
+            + " DESC , " + TodoItemsDbHelper.KEY_DUE_DATE + " ASC";
+
 
 
     // Table Create Statements

@@ -14,8 +14,6 @@ import android.widget.DatePicker;
 import com.charmedmatter.glitchybritches.todo_app.R;
 import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
 
-import java.lang.reflect.Method;
-
 public class EditDateFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
 

@@ -7,24 +7,30 @@ import android.content.CursorLoader;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.app.LoaderManager;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.charmedmatter.glitchybritches.todo_app.R;
 import com.charmedmatter.glitchybritches.todo_app.ui.services.FragmentCommunicator;
-import com.charmedmatter.glitchybritches.todo_app.ui.services.TodoItemsListAdapter;
+import com.charmedmatter.glitchybritches.todo_app.ui.services.SectionCursorAdapter;
+import com.charmedmatter.glitchybritches.todo_app.ui.services.TodoItemsAdapter;
 import com.charmedmatter.glitchybritches.todo_app.data.TodoItemsContentProvider;
 import com.charmedmatter.glitchybritches.todo_app.data.TodoItemsDbHelper;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>, FragmentCommunicator<Object> {
     ListView lvItems;
-    CursorAdapter todoItemsAdapter;
+    CursorAdapter todoItemsListAdapter;
+    SectionCursorAdapter todoItemsAdapter;
     FragmentManager fragmentManager;
+    public Spinner selectSpinner;
 
     private static final int LOADER_URI = 0;
 
@@ -32,20 +38,30 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        lvItems = (ListView) findViewById(R.id.lvItems);
-        todoItemsAdapter = new TodoItemsListAdapter(this, null, 0);
+        //Setup action bar
+        Toolbar listFreakToolbar = (Toolbar) findViewById(R.id.list_freak_toolbar);
+        listFreakToolbar.setLogo(R.drawable.ic_launcher);
+        setSupportActionBar(listFreakToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        selectSpinner = (Spinner) findViewById(R.id.spinner_view);
+        selectSpinner.setSelection(2);
 
+        //Setup to-do list container
+        lvItems = (ListView) findViewById(R.id.lvItems);
+        todoItemsAdapter = new TodoItemsAdapter(this, null, 0);
         lvItems.setAdapter(todoItemsAdapter);
-        setupListViewListener();
+
+        //Setup click listeners, loaders, and fragment manager
+        setupListeners();
         getLoaderManager().initLoader(LOADER_URI, null, this);
         fragmentManager = getSupportFragmentManager();
 
     }
 
-
-    //Add new item via adapter and then write to file
+    //Add new item via a dialog fragment
     protected void onAddItem(View v) {
         showDialog("newItem");
     }
@@ -77,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     // Click listeners (for long click (for deletions) and short clicks (for item edits))
-    private void setupListViewListener() {
+    private void setupListeners() {
         lvItems.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
             @Override
@@ -103,24 +119,55 @@ public class MainActivity extends AppCompatActivity implements
                     }
                 });
 
+        selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                restartLoader();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Log.i("MainActivity", "No Spinner Position Selected");
+            }
+        });
     }
 
+    //return user's ordering choice from spinner
+    public int getItemOrder(){
+        return selectSpinner.getSelectedItemPosition();
+    }
     //Loader methods
 
     //Restarts loader when database is updated
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
     }
-
     @Override
     public Loader<Cursor> onCreateLoader(int loader_id, Bundle bundle) {
+
+        //Define projection to be used based on user's choice from spinner
+        String projection;
+        int itemOrder = getItemOrder();
+        switch (itemOrder){
+            case 0:
+                projection = TodoItemsDbHelper.SORT_BY_PRIORITY;
+
+                break;
+            case 1:
+                projection = TodoItemsDbHelper.SORT_BY_DATE;
+                break;
+            default:
+                projection = null;
+                break;
+        }
+
                 return new CursorLoader(
                         this,   // Parent activity context
                         TodoItemsContentProvider.TABLE_URI,        // Table to query
                         null,     // Projection to return
                         null,            // No selection clause
                         null,            // No selection arguments
-                        null             // Default sort order
+                        projection       // Default sort order
                 );
     }
 

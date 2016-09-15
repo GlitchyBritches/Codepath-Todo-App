@@ -54,10 +54,12 @@ public class TodoItemsContentProvider extends ContentProvider {
             selectionArgs = null;
         }
 
+        if (sortOrder == null) {
+            sortOrder = TodoItemsDbHelper.KEY_CREATED_AT + " DESC";
+        }
 
         return db.query(TodoItemsDbHelper.TABLE_TODO, columns,
-                selection, selectionArgs,null, null, TodoItemsDbHelper.KEY_CREATED_AT + " DESC");
-
+                selection, selectionArgs, null, null, sortOrder);
     }
 
     @Nullable

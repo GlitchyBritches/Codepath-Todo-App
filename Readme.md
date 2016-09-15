@@ -34,4 +34,5 @@ Video walkthrough of implemented user stories:
 
 ## 3rd party library credits
 * SectionCursorAdapter: The list adapter in this app which makes headers possible was created by extending SectionCursorAdapter ([github.com/twotoasters/SectionCursorAdapter](https://github.com/twotoasters/SectionCursorAdapter)) by twotoasters ([twotoasters.com](http://twotoasters.com))
+* JodaTime: Used Joda Time to deal with dates: [joda.org/joda-time/](http://joda.org/joda-time/)
 * ffmpeg: sample gif created using ffmpeg command line tool: [ffmpeg.org](https://ffmpeg.org/)

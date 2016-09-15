@@ -1,7 +1,6 @@
 # ListFreak - For those who are total LIST FREAKS (v0.2)
 **(i.e. a pretty cool Codepath Android Bootcamp Pre-work Project that makes lists & doesn't afraid of anything)**
 
-**ListFreak** 
 ##Summary of functionality
 ListFreak allows users to add and remove to-do items. They can also add priorities, due dates, notes, and completion statuses to each item and customize the order of these items!
 
